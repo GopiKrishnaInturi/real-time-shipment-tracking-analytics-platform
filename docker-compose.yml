@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: shipment
+      POSTGRES_PASSWORD: shipment
+      POSTGRES_DB: shipment_db
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
